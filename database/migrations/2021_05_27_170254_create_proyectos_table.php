@@ -15,11 +15,10 @@ class CreateProyectosTable extends Migration
     {
         Schema::create('proyectos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Proyecto');
+            $table->string('proyecto');
             $table->string('link');
-            //$table->documento('DocumentoProyecto');
-            $table->unsignedBigInteger('pasante_id');
-            $table->foreign('pasante_id')->references('id')->on('pasantes')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

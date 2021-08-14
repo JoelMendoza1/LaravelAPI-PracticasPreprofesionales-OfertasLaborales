@@ -15,15 +15,14 @@ class CreateTrayectorialaboralsTable extends Migration
     {
         Schema::create('trayectorialaborals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Empresa');
-            $table->string('PuestoTrabajo');
-            $table->string('Responsabilidades');
-            $table->string('FechaInicio');
-            $table->string('FechaSalida');
-            $table->string('Contacto');
-            //$table->document('CertificadoLaboral');
-            $table->unsignedBigInteger('pasante_id');
-            $table->foreign('pasante_id')->references('id')->on('pasantes')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('empresa');
+            $table->string('puestoTrabajo');
+            $table->string('responsabilidades');
+            $table->string('fechaInicio');
+            $table->string('fechaSalida');
+            $table->string('contacto');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

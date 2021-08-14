@@ -15,6 +15,7 @@ class Oferta extends Model
         'NumeroSolicitados',
         'DirecionOferta',
         'CarreraOferta',
+        'user_id'
     ];
     public function postulacion(){
         return $this->hasMany('App\Postulacion');
@@ -22,10 +23,5 @@ class Oferta extends Model
     public function empresa(){
         return $this->belongsTo('App\Empresa');
     }
-    public static function boot(){
-        parent::boot();
-        static::creating(function ($empresa) {
-            $empresa->empresa_id = Auth::id();
-        });
-    }
+
 }

@@ -18,9 +18,8 @@ class CreateInstrucionsTable extends Migration
             $table->string('nivelInstrucion');
             $table->string('institucion');
             $table->string('especializacion');
-            //$table->document('Titulo');
-            $table->unsignedBigInteger('pasante_id');
-            $table->foreign('pasante_id')->references('id')->on('pasantes')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

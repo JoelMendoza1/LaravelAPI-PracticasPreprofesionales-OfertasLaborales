@@ -15,15 +15,15 @@ class CreateOfertasTable extends Migration
     {
         Schema::create('ofertas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Oferta');
-            $table->string('FechaOferta');
-            $table->text('DescripcionOferta');
-            $table->string('HorarioJornada');
-            $table->integer('NumeroSolicitados');
-            $table->string('DirecionOferta');
-            $table->string('CarreraOferta');
+            $table->string('oferta');
+            $table->string('fechaOferta');
+            $table->text('descripcionOferta');
+            $table->string('horario');
+            $table->integer('numberoPostulantes');
+            $table->string('direcionOferta');
+            $table->string('carreraOferta');
             $table->unsignedBigInteger('empresa_id');
-            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

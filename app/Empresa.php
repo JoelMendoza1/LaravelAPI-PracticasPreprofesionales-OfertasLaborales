@@ -5,27 +5,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Empresa extends Model implements JWTSubject
+class Empresa extends Model
 {
     protected $fillable =[
         'RUC',
-        'NomEmpresa',
-        'TipoEmpresa',
-        'TelfEmpresa',
-        'EmailEmpresa',
-        'DireccionEmpresa',
-        'ClaveEmpresa'
+        'nomEmpresa',
+        'tipoEmpresa',
+        'telfEmpresa',
+        'emailEmpresa',
+        'direccionEmpresa',
+        'claveEmpresa',
+        'user_id'
     ];
-    public function getJWTIdentifier(){
-        return $this->getKey();
+    public function user(){
+        return $this->belongsTo('App\User');
     }
-    public function getJWTCustomClaims(){
-        return [];
-    }
-    public function ofertas(){
-        return $this->hasMany('App\Oferta');
-    }
-    public function solicitudAprobacion(){
-        return $this->hasOne('App\Solicitudaprobacion');
-    }
+
 }

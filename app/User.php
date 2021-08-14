@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable /*,HasRoles*/;
 
     /**
      * The attributes that are mass assignable.
@@ -48,4 +49,28 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Solicitudaprobacion');
     }
 
+    public function capacitacion(){
+        return $this->hasMany('App\Capacitacion');
+    }
+    public function trayectoriasLaboral(){
+        return $this->hasMany('App\Trayectorialaboral');
+    }
+    public function proyecto(){
+        return $this->hasMany('App\Proyecto');
+    }
+    public function instruccion(){
+        return $this->hasMany('App\Instrucion');
+    }
+    public function habilidad(){
+        return $this->hasMany('App\Habilidad');
+    }
+    public function idioma(){
+        return $this->hasMany('App\Idioma');
+    }
+    public function ofertas(){
+        return $this->hasMany('App\Oferta');
+    }
+    public function empresa(){
+        return $this->hasOne('App\Empresa');
+    }
 }

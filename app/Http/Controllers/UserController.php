@@ -8,11 +8,32 @@ use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\JWTGuard;
 
 class UserController extends Controller
 {
+    public function index(){
+        return new UserCollection(User::paginate());
+    }
+    public function show(User $user){
+        return response()->json(new UserResource($user),200);
+    }
+    public function update(Request $request,User $user){
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        $user->update($validatedData);
+        return response()->json($user,200);
+    }
+    public function delete(User $user){
+        $user->delete();
+        return response()->json(null,204);
+    }
+
     public function authenticate(Request $request){
         $credentials = $request->only('email', 'password');
         try {

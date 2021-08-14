@@ -12,8 +12,8 @@ class Postulacion extends Model
     public function oferta(){
         return $this->belongsTo('App\Oferta');
     }
-    public function pasante(){
-        return $this->belongsTo('App\Pasante');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 
 }

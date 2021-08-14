@@ -8,20 +8,19 @@ use Illuminate\Support\Facades\Auth;
 class Capacitacion extends Model
 {
     protected $fillable =[
+        //'id',
         'nombreCapacitacion',
         'nombreInstitucionCapacitadora',
         'fechaInicioCapacitacion',
         'fechaFinCapacitacion',
+        'user_id'
     ];
-    public function pasante(){
-        return $this->belongsTo('App\Pasante');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
-    /*
-    public static function boot(){
-        static::creating(function ($pasante) {
-            $pasante->pasante_id = Auth::id();
+    /*public static function boot(){
+        static::creating(function ($user) {
+            $user->user_id = Auth::id();
         });
-
     }*/
-
 }

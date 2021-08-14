@@ -16,12 +16,13 @@ class CreateEmpresasTable extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('RUC',13)->unique();
-            $table->string('NomEmpresa');
-            $table->string('TipoEmpresa');
-            $table->string('TelfEmpresa',10);
-            $table->string('EmailEmpresa')->unique();
-            $table->string('DireccionEmpresa');
-            $table->string('ClaveEmpresa');
+            $table->string('nombreEmpresa');
+            $table->string('tipoEmpresa');
+            $table->string('telefonoEmpresa',10);
+            $table->string('emailEmpresa')->unique();
+            $table->string('direccionEmpresa');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

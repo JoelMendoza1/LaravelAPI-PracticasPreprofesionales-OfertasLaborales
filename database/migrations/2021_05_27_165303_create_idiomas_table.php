@@ -17,8 +17,8 @@ class CreateIdiomasTable extends Migration
             $table->bigIncrements('id');
             $table->string('idioma');
             $table->string('nivel');
-            $table->unsignedBigInteger('pasante_id');
-            $table->foreign('pasante_id')->references('id')->on('pasantes')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

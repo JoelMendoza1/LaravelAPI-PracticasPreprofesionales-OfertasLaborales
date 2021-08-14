@@ -3,6 +3,7 @@
 use App\Empresa;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class EmpresaTableSeeder extends Seeder
 {
@@ -16,26 +17,22 @@ class EmpresaTableSeeder extends Seeder
         // Vaciar la tabla.
         Empresa::truncate();
         $faker = \Faker\Factory::create();
-        $password = Hash::make('123123');
-        Empresa::create([
-            'RUC'=>'1720804432',
-            'NomEmpresa'=>'Escuela Politecnica Nacional',
-            'TipoEmpresa'=>'Publica',
-            'TelfEmpresa'=>'0992514455',
-            'EmailEmpresa'=>'wester.mendoza@epn.edu.ec',
-            'DireccionEmpresa'=>'Quito - Ladron de Guevara',
-            'ClaveEmpresa'=>$password,
-        ]);
-        // Crear datos ficticios en la tabla
-        for ($i = 0; $i < 20; $i++) {
+        // Obtenemos la lista de todos los usuarios creados e
+        // iteramos sobre cada uno y simulamos un inicio de
+        // sesión con cada uno para crear habilidades en su nombre
+        $users = App\User::all();
+        foreach ($users as $user) {
+            // iniciamos sesión con este usuario
+            JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+            // Y ahora con este usuario creamos algunas habilidades
             Empresa::create([
                 'RUC'=>$faker->unique()->buildingNumber,
-                'NomEmpresa'=> $faker->company,
-                'TipoEmpresa'=>$faker->text,
-                'TelfEmpresa'=>$faker->buildingNumber,
-                'EmailEmpresa'=>$faker->unique()->email,
-                'DireccionEmpresa'=>$faker->address,
-                'ClaveEmpresa'=>$password,
+                'nombreEmpresa'=>$faker->company,
+                'tipoEmpresa'=>$faker->text,
+                'telefonoEmpresa'=>$faker->buildingNumber,
+                'emailEmpresa'=>$faker->unique()->email,
+                'direccionEmpresa'=>$faker->address,
+                'user_id'=>$user->id,
             ]);
 
         }

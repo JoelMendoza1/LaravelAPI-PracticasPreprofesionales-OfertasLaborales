@@ -16,10 +16,10 @@ class CapacitacionesTableSeeder extends Seeder
          // Vaciar la tabla.
          Capacitacion::truncate();
          $faker = \Faker\Factory::create();
-         $pasantes = App\Pasante::all();
-         foreach ($pasantes as $pasante) {
+         $users = App\User::all();
+         foreach ($users as $user) {
              // iniciamos sesión con este usuario de pasante
-             JWTAuth::attempt(['email' => $pasante->email, 'password' => '123123']);
+             JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
              // Y ahora con este usuario creamos una solicitud
              for ($i = 0; $i < 3; $i++) {
                 Capacitacion::create([
@@ -27,7 +27,7 @@ class CapacitacionesTableSeeder extends Seeder
                     'nombreInstitucionCapacitadora'=>$faker->company,
                     'fechaInicioCapacitacion'=>$faker->dateTimeThisCentury($max = 'now', $timezone = null),
                     'fechaFinCapacitacion'=>$faker->dateTimeThisCentury($max = 'now', $timezone = null),
-                    'pasante_id'=>$pasante->id,
+                    'user_id'=>$user->id,
                 ]);
             }
          }

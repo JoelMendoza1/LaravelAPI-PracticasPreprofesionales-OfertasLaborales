@@ -16,11 +16,11 @@ class CreatePostulacionsTable extends Migration
         Schema::create('postulacions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('estadoPostulacion');
-            $table->text('descripcion', null);
-            $table->unsignedBigInteger('pasante_id');
-            $table->foreign('pasante_id')->references('id')->on('pasantes')->onDelete('cascade')->onUpdate('cascade');
+            $table->text('descripcion')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->unsignedBigInteger('oferta_id');
-            $table->foreign('oferta_id')->references('id')->on('ofertas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('oferta_id')->references('id')->on('ofertas')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }
