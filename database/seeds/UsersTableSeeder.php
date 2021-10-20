@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
         // no se vuelva lento.
 
         $password = Hash::make('123123');
+        $image_name = $faker->image('public/storage/usersimages', 400, 300, 'cats',false);
         User::create([
             'name' => 'Administrador',
             'lastname'=>'ApellidoAdmin',
@@ -34,11 +35,15 @@ class UsersTableSeeder extends Seeder
             'semester'=>null,
             'totalSemestrerCarrer'=>null,
             'request'=>true,
-            'descriptionRequest'=>null
+            'descriptionRequest'=>null,
+            'image' => 'public/usersimages/' . $image_name,
+            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
 
         ]);
         // Generar algunos usuarios Pasantes para nuestra aplicacion
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
+            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
+
             User::create([
             'name' =>$faker->firstName,
             'lastname'=>$faker->lastName,
@@ -53,11 +58,39 @@ class UsersTableSeeder extends Seeder
             'semester'=>$faker->randomElement($array = array ('Primero','Segundo','Tercer','Cuarto','Quinto')),
             'totalSemestrerCarrer'=>'Cinco',
             'request'=>true,
-            'descriptionRequest'=>null
+            'descriptionRequest'=>null,
+            'image' => 'public/usersimages/' . $image_name,
+            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
+
 
             ]);
         }
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
+            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
+
+            User::create([
+            'name' =>$faker->firstName,
+            'lastname'=>$faker->lastName,
+            'email' =>$faker->email,
+            'password' => $password,
+            'identificationCard'=>$faker->buildingNumber,
+            'telephoneNumber'=>$faker->buildingNumber,
+            'address'=>$faker->address,
+            'dateOfBirth'=>$faker->date($format = 'd-m-Y', $max = 'now'),
+            'career'=>$faker->randomElement($array = array ('Desarrollo de Sofware','Agua y saniamiento ambiental','Electromescanica','Telecomunicaciones')),
+            'institution'=>'Escuela Politecnica Nacional',
+            'semester'=>$faker->randomElement($array = array ('Primero','Segundo','Tercer','Cuarto','Quinto')),
+            'totalSemestrerCarrer'=>'Cinco',
+            'request'=>null,
+            'descriptionRequest'=>true,
+            'image' => 'public/usersimages/' . $image_name,
+            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
+
+
+            ]);
+        }
+        for ($i = 0; $i < 20; $i++) {
+            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
             User::create([
                 'name' =>$faker->firstName,
                 'lastname'=>$faker->lastName,
@@ -71,8 +104,10 @@ class UsersTableSeeder extends Seeder
                 'institution'=>$faker->company,
                 'semester'=>null,
                 'totalSemestrerCarrer'=>null,
-                'request'=>true,
-                'descriptionRequest'=>null
+                'request'=>false,
+                'descriptionRequest'=>'La validación de su cuenta se encuentra en proceso',
+                'image' => 'public/usersimages/' . $image_name,
+                'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
             ]);
         }
     }

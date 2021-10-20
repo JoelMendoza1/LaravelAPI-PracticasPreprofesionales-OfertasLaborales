@@ -22,7 +22,7 @@ class CreateTrayectorialaboralsTable extends Migration
             $table->string('fechaSalida');
             $table->string('contacto');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

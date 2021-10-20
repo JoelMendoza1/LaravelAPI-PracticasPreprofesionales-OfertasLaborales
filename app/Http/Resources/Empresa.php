@@ -17,13 +17,13 @@ class Empresa extends JsonResource
         return [
             'id'=>$this->id,
             'RUC'=>$this->RUC,
-            'nomEmpresa'=>$this->nomEmpresa,
+            'nombreEmpresa'=>$this->nombreEmpresa,
             'tipoEmpresa'=>$this->tipoEmpresa,
-            'telfEmpresa'=>$this->telfEmpresa,
+            'telefonoEmpresa'=>$this->telefonoEmpresa,
             'emailEmpresa'=>$this->emailEmpresa,
             'direccionEmpresa'=>$this->direccionEmpresa,
+            'imagen'=> $this->imagen,
             'user_id'=>$this->User::find($this->user_id),
-
         ];
     }
 }

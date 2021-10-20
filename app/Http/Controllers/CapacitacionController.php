@@ -14,7 +14,6 @@ class CapacitacionController extends Controller
         //'body,required'=>'El body no es valido'
     ];
     public function index(User $user){
-
         return response()->json(CapacitacionResource::collection($user->capacitacion),200);
     }
     public function show(User $user, Capacitacion $capacitacion){

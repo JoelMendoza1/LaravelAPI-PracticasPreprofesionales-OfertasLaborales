@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Auth;
 class Oferta extends Model
 {
     protected $fillable =[
-        'Oferta',
-        'FechaOferta',
-        'DescripcionOferta',
-        'HorarioJornada',
-        'NumeroSolicitados',
-        'DirecionOferta',
-        'CarreraOferta',
-        'user_id'
+        'oferta',
+        'fechaOferta',
+        'descripcionOferta',
+        'horario',
+        'numberoPostulantes',
+        'direcionOferta',
+        'carreraOferta',
+        'visible',
+        'empresa_id'
     ];
     public function postulacion(){
         return $this->hasMany('App\Postulacion');

@@ -25,13 +25,16 @@ class EmpresaTableSeeder extends Seeder
             // iniciamos sesión con este usuario
             JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
             // Y ahora con este usuario creamos algunas habilidades
+            $image_name = $faker->image('public/storage/empresasimages', 400, 300, 'cats',false);
+
             Empresa::create([
                 'RUC'=>$faker->unique()->buildingNumber,
                 'nombreEmpresa'=>$faker->company,
-                'tipoEmpresa'=>$faker->text,
+                'tipoEmpresa'=>$faker->randomElement($array = array ('Privada','Publica')),
                 'telefonoEmpresa'=>$faker->buildingNumber,
                 'emailEmpresa'=>$faker->unique()->email,
                 'direccionEmpresa'=>$faker->address,
+                'imagen' => 'public/empresasimages/' . $image_name,
                 'user_id'=>$user->id,
             ]);
 

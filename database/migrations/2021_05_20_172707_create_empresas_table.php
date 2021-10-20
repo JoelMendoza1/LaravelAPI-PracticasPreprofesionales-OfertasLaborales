@@ -21,8 +21,9 @@ class CreateEmpresasTable extends Migration
             $table->string('telefonoEmpresa',10);
             $table->string('emailEmpresa')->unique();
             $table->string('direccionEmpresa');
+            $table->string('imagen')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

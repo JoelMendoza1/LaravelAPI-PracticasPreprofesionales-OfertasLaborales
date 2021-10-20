@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+$SymfonyResopnse = 'Symfony\Component\HttpFoundation\Response';
 use Closure;
 
 class Cors
@@ -14,9 +14,17 @@ class Cors
      * @return mixed
      */
     public function handle($request, Closure $next){
-        return $next($request)
-        ->header('Access-Control-Allow-Origin', 'http://localhost:3000')
-        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
-        ->header('Access-Control-Allow-Headers', 'x-access-token, Origin, X-Requested-With, Content-Type, Accept');
+
+        $response= $next($request);
+
+        $headers = [
+            'Access-Control-Allow-Origin'=> '*',
+            'Access-Control-Allow-Methods'=> 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers'=> 'x-access-token, Origin, X-Requested-With, Content-Type, Accept , Authorization',
+        //, Authorization, Application'
+        ];
+        foreach ($headers as $key => $value)
+        $response->headers->set($key, $value);
+        return $response;
  }
 }

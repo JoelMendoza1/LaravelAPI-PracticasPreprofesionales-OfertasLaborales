@@ -18,7 +18,22 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'lastname',
+        'email',
+        'password',
+        'identificationCard',
+        'telephoneNumber',
+        'address',
+        'dateOfBirth',
+        'career',
+        'institution',
+        'semester',
+        'totalSemestrerCarrer',
+        'request',
+        'descriptionRequest',
+        'image',
+        'document',
     ];
 
     /**
@@ -67,10 +82,10 @@ class User extends Authenticatable implements JWTSubject
     public function idioma(){
         return $this->hasMany('App\Idioma');
     }
-    public function ofertas(){
-        return $this->hasMany('App\Oferta');
-    }
     public function empresa(){
         return $this->hasOne('App\Empresa');
+    }
+    public function postulacion(){
+        return $this->hasMany('App\Postulacion');
     }
 }

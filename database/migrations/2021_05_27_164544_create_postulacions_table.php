@@ -15,12 +15,12 @@ class CreatePostulacionsTable extends Migration
     {
         Schema::create('postulacions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('estadoPostulacion');
+            $table->boolean('estadoPostulacion')->nullable();
             $table->text('descripcion')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('oferta_id');
-            $table->foreign('oferta_id')->references('id')->on('ofertas')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('oferta_id')->references('id')->on('ofertas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

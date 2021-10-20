@@ -9,16 +9,17 @@ class Empresa extends Model
 {
     protected $fillable =[
         'RUC',
-        'nomEmpresa',
+        'nombreEmpresa',
         'tipoEmpresa',
-        'telfEmpresa',
+        'telefonoEmpresa',
         'emailEmpresa',
         'direccionEmpresa',
-        'claveEmpresa',
         'user_id'
     ];
     public function user(){
         return $this->belongsTo('App\User');
     }
-
+    public function ofertas(){
+        return $this->hasMany('App\Oferta');
+    }
 }

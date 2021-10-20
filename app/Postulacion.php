@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Postulacion extends Model
 {
     protected $fillable = [
-        'EstadoPostulacion',
+        'estadoPostulacion',
+        'descripcion',
+        'user_id',
+        'oferta_id'
     ];
     public function oferta(){
         return $this->belongsTo('App\Oferta');

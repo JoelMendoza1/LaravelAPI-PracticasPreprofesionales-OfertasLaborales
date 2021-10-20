@@ -22,8 +22,9 @@ class CreateOfertasTable extends Migration
             $table->integer('numberoPostulantes');
             $table->string('direcionOferta');
             $table->string('carreraOferta');
+            $table->boolean('visible');
             $table->unsignedBigInteger('empresa_id');
-            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

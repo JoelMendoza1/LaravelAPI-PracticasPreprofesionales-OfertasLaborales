@@ -22,6 +22,8 @@ Route::get('/', function () {
 Route::group(['middleware' => ['cors']], function () {
     Route::post('registrar','UserController@register');
     Route::post('inicioSesion','UserController@authenticate');
+    Route::get('users/{user}/image', 'UserController@image');
+    Route::get('users/{user}/document', 'UserController@document');
 
 
     Route::group(['middleware' => ['jwt.verify']], function() {
@@ -30,11 +32,14 @@ Route::group(['middleware' => ['cors']], function () {
         Route::get('users/{user}/empresas','EmpresaController@index');
         Route::get('users/{user}/empresas/{empresa}','EmpresaController@show');
         Route::post('users/{user}/empresas','EmpresaController@store');
-        Route::put('users/{user}/empresas/{empresa}','EmpresaController@update');
-        Route::delete('users/{user}/empresas/{empresa}','EmpresaController@delete');
+        Route::put('empresas/{empresa}','EmpresaController@update');
+        Route::delete('empresas/{empresa}','EmpresaController@delete');
 
         //Usuario
         Route::get('users','UserController@index');
+        Route::get('aprobados','UserController@index1');
+        Route::get('rechazados','UserController@index2');
+        Route::get('pendientes','UserController@index3');
         Route::get('users/{user}','UserController@show');
         Route::put('users/{user}','UserController@update');
         Route::delete('users/{user}','UserController@delete');
@@ -87,9 +92,23 @@ Route::group(['middleware' => ['cors']], function () {
         //Oferta
         Route::get('ofertas','OfertaController@index');
         Route::get('ofertas/{oferta}','OfertaController@show');
-        Route::post('ofertas','OfertaController@store');
+        Route::post('empresas/{empresa}/ofertas','OfertaController@store');
         Route::put('ofertas/{oferta}','OfertaController@update');
         Route::delete('ofertas/{oferta}','OfertaController@delete');
+
+        Route::get('empresas/{empresa}/ofertas','OfertaController@index1');
+        Route::get('empresas/{empresa}/visibles','OfertaController@index2');
+        Route::get('empresas/{empresa}/ocultos','OfertaController@index3');
+
+        //Postulacion
+        Route::get('ofertas/{oferta}/postulacions','PostulacionController@index1');
+        Route::get('users/{user}/postulacions','PostulacionController@index2');
+        Route::get('users/{user}/postulacionsPendiente','PostulacionController@index3');
+        Route::get('users/{user}/postulacionsAprobado','PostulacionController@index4');
+        Route::get('users/{user}/postulacionsRechazado','PostulacionController@index5');
+        Route::get('postulacions/{postulacion}','PostulacionController@show');
+
+        Route::post('users/{user}/postulacion','PostulacionController@store');
 
     });
 });

@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TrayectoriasLaboralesTableSeeder::class);
         $this->call(ProyectosTableSeeder::class);
         $this->call(CapacitacionesTableSeeder::class);
+        $this->call(OfertasTableSeeder::class);
         //Postulacion
-        //Ofertas
         Schema::enableForeignKeyConstraints();
     }
 }
