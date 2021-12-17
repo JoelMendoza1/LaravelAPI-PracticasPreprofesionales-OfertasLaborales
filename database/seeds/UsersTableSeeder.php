@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         // no se vuelva lento.
 
         $password = Hash::make('123123');
-        $image_name = $faker->image('public/storage/usersimages', 400, 300, 'cats',false);
+        $image_name = $faker->image('public\storage\usersimages', 400, 300, null, false);
         User::create([
             'name' => 'Administrador',
             'lastname'=>'ApellidoAdmin',

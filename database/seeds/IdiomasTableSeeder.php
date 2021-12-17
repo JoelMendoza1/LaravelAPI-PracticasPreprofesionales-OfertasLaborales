@@ -27,8 +27,8 @@ class IdiomasTableSeeder extends Seeder
 
             for ($j = 0; $j < 5; $j++) {
                 Idioma::create([
-                    'idioma' => $faker->languageCode,
-                    'nivel' => $faker->sentence,
+                    'idioma' => $faker->country,
+                    'nivel' => $faker->numberBetween($int1=0,$int2=99),
                     'user_id'=>$user->id,
                 ]);
             }

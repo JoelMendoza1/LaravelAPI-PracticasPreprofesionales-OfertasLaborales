@@ -16,7 +16,8 @@ class Proyecto extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'Proyecto'=>$this->Proyecto,
+            'proyecto'=>$this->proyecto,
+            'description'=>$this->description,
             'link'=>$this->link,
             'user_id'=>$this->User::find($this->user_id),
         ];

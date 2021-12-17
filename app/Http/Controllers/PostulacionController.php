@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Oferta;
 use Illuminate\Http\Request;
 use App\Http\Resources\Postulacion as PostulacionResorce;
@@ -19,19 +20,19 @@ class PostulacionController extends Controller
         'oferta_id,required'=>'La oferta no existe',
     ];
     public function index1(Oferta $oferta){
-        return response()->json(PostulacionResorce::collection( $oferta->postulacion),200);
+        return response()->json(PostulacionResorce::collection( $oferta->postulacion->sortByDesc('updated_at')),200);
     }
     public function index2(User $user){
-        return response()->json(PostulacionResorce::collection($user->postulacion),200);
+        return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('updated_at')),200);
     }
     public function index3(User $user){
-        return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('created_at')->whereNull('estadoPostulacion')),200);
+        return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('updated_at')->whereNull('estadoPostulacion')),200);
     }
     public function index4(User $user){
-        return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('created_at')->where('estadoPostulacion', 'LIKE', 1)),200);
+        return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('updated_at')->where('estadoPostulacion', 'LIKE', 1)),200);
     }
     public function index5(User $user){
-        return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('created_at')->where('estadoPostulacion', 'LIKE',0)),200);
+        return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('updated_at')->where('estadoPostulacion', 'LIKE',false)),200);
     }
     public function show(Postulacion $postulacion){
         return response()->json(new PostulacionResorce($postulacion),200);
@@ -45,5 +46,13 @@ class PostulacionController extends Controller
         ], self::$messages);
         $postulacion =$user->postulacion()->save(new Postulacion($request->all()));
         return response()->json($postulacion,201);
+    }
+    public function update(Request $request,Postulacion $postulacion){
+        $postulacion->update($request->all());
+        return response()->json($postulacion,200);
+    }
+    public function delete(Postulacion $postulacion){
+        $postulacion->delete();
+        return response()->json(null,204);
     }
 }

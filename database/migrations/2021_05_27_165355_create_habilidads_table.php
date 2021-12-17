@@ -16,7 +16,7 @@ class CreateHabilidadsTable extends Migration
         Schema::create('habilidads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('descripcion');
-            $table->string('dominio');
+            $table->integer('dominio');
             $table->string('habilidad');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

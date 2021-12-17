@@ -16,7 +16,7 @@ class CreateIdiomasTable extends Migration
         Schema::create('idiomas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('idioma');
-            $table->string('nivel');
+            $table->integer('nivel');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

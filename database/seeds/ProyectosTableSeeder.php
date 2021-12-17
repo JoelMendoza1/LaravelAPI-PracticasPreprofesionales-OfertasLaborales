@@ -27,7 +27,8 @@ class ProyectosTableSeeder extends Seeder
             $num_i = 2;
             for ($j = 0; $j < $num_i; $j++) {
                 Proyecto::create([
-                    'Proyecto' => $faker->text,
+                    'proyecto' => $faker->word,
+                    'description'=>$faker->text,
                     'link' => $faker->url,
                     'user_id'=>$user->id,
                 ]);

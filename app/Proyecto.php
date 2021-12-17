@@ -9,8 +9,9 @@ class Proyecto extends Model
 {
     //
     protected $fillable = [
-        'Proyecto',
-        'link'
+        'proyecto',
+        'link',
+        'description'
     ];
     public function user(){
         return $this->belongsTo('App\User');

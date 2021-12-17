@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 class Trayectorialaboral extends Model
 {
     protected $fillable=[
-        'PuestoTrabajo',
-        'Responsabilidades',
-        'FechaInicio',
-        'FechaSalida',
-        'Contacto'
+        'empresa',
+        'puestoTrabajo',
+        'responsabilidades',
+        'fechaInicio',
+        'fechaSalida',
+        'contacto'
     ];
     public function user(){
         return $this->belongsTo('App\User');

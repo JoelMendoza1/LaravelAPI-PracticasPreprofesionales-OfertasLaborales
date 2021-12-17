@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 use App\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -9,16 +11,14 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\UserCollection;
-use Facade\FlareClient\Stacktrace\File;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
-use phpDocumentor\Reflection\Types\Null_;
-use SebastianBergmann\Environment\Console;
-use Tymon\JWTAuth\JWTGuard;
 
 class UserController extends Controller
 {
+    private static $messages=[
+        'password, confirmed'=>'Confirma la contraseña',
+        //'body,required'=>'El body no es valido'
+    ];
     public function image(User $user){
 
        return Storage::download( $user->image);
@@ -48,8 +48,22 @@ class UserController extends Controller
     public function show(User $user){
         return response()->json(new UserResource($user),200);
     }
+
     public function updateImgen(Request $request,User $user){
-        $image_path=Storage::putFile('public/usersimages');
+        if($user->image==""){
+            $path2 = $request->image -> store('public/usersimages');
+            $user->image = $path2;
+        }else{
+            Storage::delete($user->image);
+            $path2 = $request->image -> store('public/usersimages');
+            $user->image = $path2;
+        }
+
+
+        //$path2->copy('storage/app/public'.trim($path2, "public"), "public/storage/usersimages");
+        //Storage::putFile('usersimages','storage/app/public'.trim($path2, "public") );
+        $user->save();
+        return response()->json(new UserResource($user),200);
     }
     public function update(Request $request,User $user){
         /*$validatedData = $request->validate([
@@ -63,12 +77,22 @@ class UserController extends Controller
             'dateOfBirth'=> 'required|string|max:255',
             'institution'=> 'required|string|max:255',
         ]);*/
-
-
-
         $user->update($request->all());
 
         return response()->json($user,200);
+    }
+    public function updatePasword(Request $request,User $user){
+        $checkPassword=Hash::check($request->get('oldpassword'),$user->password) ;
+        if($checkPassword){
+            $request->validate([
+                'password' => 'required|string|min:6|confirmed'
+            ], self::$messages);
+            $user->password= Hash::make($request->get('password'));
+            $user->update();
+            return response()->json($user->password,200);
+        }else{
+            return response()->json(['message'=>'Contraseña anterior incorrecta'],400);
+        }
     }
     public function delete(User $user){
         $user->delete();

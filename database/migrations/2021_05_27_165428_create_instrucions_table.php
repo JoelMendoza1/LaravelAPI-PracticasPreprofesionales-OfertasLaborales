@@ -15,9 +15,11 @@ class CreateInstrucionsTable extends Migration
     {
         Schema::create('instrucions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('instruccion');
             $table->string('nivelInstrucion');
             $table->string('institucion');
             $table->string('especializacion');
+            $table->string('document');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

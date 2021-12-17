@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 class Instrucion extends Model
 {
     protected $fillable =[
-        'NivelInstrucion',
-        'Institucion',
-        'Especializacion',
-        'user_id'
+        'instruccion',
+        'nivelInstrucion',
+        'institucion',
+        'especializacion',
+        'document',
     ];
     public function user(){
         return $this->belongsTo('App\User');

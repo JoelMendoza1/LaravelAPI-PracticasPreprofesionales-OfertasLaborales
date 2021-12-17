@@ -16,14 +16,13 @@ class IdiomaController extends Controller
     public function index(User $user){
         return  response()->json(IdiomaResource::collection($user->idioma),200);
     }
-    public function show(User $user, Idioma $idioma){
-        return response()->json($user->idioma()->where('id',$idioma->id)->firstOrFail(),200);
+    public function show(Idioma $idioma){
+        return response()->json(new IdiomaResource($idioma),200);
     }
     public function store(Request $request, User $user){
         $request->validate([
             'idioma'=>'required|string|max:255',
-            'nivel'=> 'required|string|max:255',
-            'user_id'=>'required|exists:users,id',
+            'nivel'=> 'required|max:3',
         ],self::$messages);
         $idioma =$user->idioma()->save(new Idioma($request->all()));
         return response()->json($idioma,201);
@@ -31,14 +30,13 @@ class IdiomaController extends Controller
     public function update(Request $request,Idioma $idioma, User $user){
         $request->validate([
             'idioma'=>'required|string|max:255',
-            'nivel'=> 'required|string|max:255',
-            'user_id'=>'required|exists:users,id',
+            'nivel'=> 'required|max:3',
         ], self::$messages);
-        $idioma=$user->idioma()->update(new Idioma($request->all()));
+        $idioma->update($request->all());
         return response()->json($idioma,200);
     }
-    public function delete(Idioma $idioma,User $user){
-        $user->$idioma->delete();
+    public function delete(Idioma $idioma){
+        $idioma->delete();
         return response()->json(null,204);
     }
 

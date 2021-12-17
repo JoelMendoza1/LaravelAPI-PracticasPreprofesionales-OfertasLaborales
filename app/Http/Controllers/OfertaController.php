@@ -25,7 +25,6 @@ class OfertaController extends Controller
         $oferta=Oferta::orderBy('id', 'DESC')->where('visible', 'LIKE', 1)->paginate(10);
         return new OfertaCollection($oferta);
     }
-
     public function index1(Empresa $empresa){
         $oferta= $empresa->ofertas;
         return response()->json(new OfertaCollection( $oferta),200);

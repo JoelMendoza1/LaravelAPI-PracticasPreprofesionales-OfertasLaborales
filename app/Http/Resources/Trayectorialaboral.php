@@ -16,12 +16,12 @@ class Trayectorialaboral extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'Empresa'=>$this->Empresa,
-            'PuestoTrabajo'=>$this->institucion,
-            'Resposabilidades'=>$this->Resposabilidades,
-            'FechaInicio'=>$this->FechaInicio,
-            'FechaSalida'=>$this->FechaSalida,
-            'Contacto'=>$this->Contacto,
+            'empresa'=>$this->empresa,
+            'puestoTrabajo'=>$this->puestoTrabajo,
+            'responsabilidades'=>$this->responsabilidades,
+            'fechaInicio'=>$this->fechaInicio,
+            'fechaSalida'=>$this->fechaSalida,
+            'contacto'=>$this->contacto,
             'user_id'=>$this->User::find($this->user_id),
         ];
     }

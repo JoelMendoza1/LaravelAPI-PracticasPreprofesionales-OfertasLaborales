@@ -16,6 +16,8 @@ class Instruccion extends JsonResource
     {
         return [
             'id'=>$this->id,
+            'instruccion'=>$this->instruccion,
+            'document'=>$this->document,
             'nivelInstrucion'=>$this->nivelInstrucion,
             'institucion'=>$this->institucion,
             'especializacion'=>$this->especializacion,

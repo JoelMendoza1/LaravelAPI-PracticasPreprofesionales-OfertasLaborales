@@ -17,29 +17,31 @@ class ProyectoController extends Controller
         $proyecto = $user->proyecto;
         return  response()->json(ProyectoResource::collection($proyecto),200) ;
     }
-    public function show(User $user, Proyecto $proyecto){
-        return response()->json($user->proyecto()->where('id',$proyecto->id)->firstOrFail(),200);
+    public function show(Proyecto $proyecto){
+        return response()->json(new ProyectoResource($proyecto),200);
     }
     public function store(Request $request, User $user){
         $request->validate([
-            'Proyecto'=>'required|string|max:255',
+            'proyecto'=>'required|string|max:255',
             'link'=> 'required|string|max:255',
-            'user_id'=>'required|exists:users,id',
+            'description'=> 'required|string|max:255',
+            //'user_id'=>'required|exists:users,id',
         ],self::$messages);
         $proyecto =$user->proyecto()->save(new Proyecto($request->all()));
         return response()->json($proyecto,201);
     }
     public function update(Request $request,Proyecto $proyecto, User $user){
         $request->validate([
-            'Proyecto'=>'required|string|max:255',
+            'proyecto'=>'required|string|max:255',
             'link'=> 'required|string|max:255',
-            'user_id'=>'required|exists:users,id',
+            'description'=> 'required|string|max:255',
+            //'user_id'=>'required|exists:users,id',
         ], self::$messages);
-        $proyecto=$user->proyecto()->update(new Proyecto($request->all()));
+        $proyecto->update($request->all());
         return response()->json($proyecto,200);
     }
-    public function delete(Proyecto $proyecto,User $user){
-        $user->$proyecto->delete();
+    public function delete(Proyecto $proyecto){
+        $proyecto->delete();
         return response()->json(null,204);
     }
 

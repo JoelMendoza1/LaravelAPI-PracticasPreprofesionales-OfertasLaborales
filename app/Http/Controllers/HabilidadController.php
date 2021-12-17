@@ -17,31 +17,29 @@ class HabilidadController extends Controller
         $habilidad = $user->habilidad;
         return  response()->json(HabilidadResource::collection($habilidad),200) ;
     }
-    public function show(User $user, Habilidad $habilidad){
-        return response()->json($user->habilidad()->where('id',$habilidad->id)->firstOrFail(),200);
+    public function show(Habilidad $habilidad){
+        return response()->json(new HabilidadResource($habilidad),200);
     }
     public function store(Request $request, User $user){
         $request->validate([
             'descripcion'=>'required|string|max:255',
-            'dominio'=> 'required|string|max:3',
+            'dominio'=> 'required|max:3',
             'habilidad'=>'required|string|max:255',
-            'user_id'=>'required|exists:users,id',
         ],self::$messages);
         $habilidad =$user->habilidad()->save(new Habilidad($request->all()));
         return response()->json($habilidad,201);
     }
-    public function update(Request $request,Habilidad $habilidad, User $user){
+    public function update(Request $request,Habilidad $habilidad){
         $request->validate([
             'descripcion'=>'required|string|max:255',
-            'dominio'=> 'required|string|max:3',
+            'dominio'=> 'required|max:3',
             'habilidad'=>'required|string|max:255',
-            'user_id'=>'required|exists:users,id',
         ], self::$messages);
-        $habilidad=$user->habilidad()->update(new Habilidad($request->all()));
+        $habilidad->update($request->all());
         return response()->json($habilidad,200);
     }
-    public function delete(Habilidad $habilidad,User $user){
-        $user->$habilidad->delete();
+    public function delete(Habilidad $habilidad){
+        $habilidad->delete();
         return response()->json(null,204);
     }
 

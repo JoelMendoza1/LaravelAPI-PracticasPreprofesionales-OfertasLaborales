@@ -28,7 +28,7 @@ class HabilidadesTableSeeder extends Seeder
             for ($j = 0; $j < $num_h; $j++) {
                 Habilidad::create([
                     'descripcion' => $faker->paragraph,
-                    'dominio' => $faker->numberBetween($int1=1,$int2=100),
+                    'dominio' => $faker->numberBetween($int1=0,$int2=99),
                     'habilidad'=>$faker->sentence,
                     'user_id'=>$user->id,
                 ]);

@@ -13,7 +13,7 @@ class Capacitacion extends Model
         'nombreInstitucionCapacitadora',
         'fechaInicioCapacitacion',
         'fechaFinCapacitacion',
-        'user_id'
+        'document'
     ];
     public function user(){
         return $this->belongsTo('App\User');
