@@ -53,10 +53,10 @@ Route::group(['middleware' => ['cors']], function () {
 
         //Capacitacion
         Route::get('users/{user}/capacitacions','CapacitacionController@index');
-        Route::get('users/{user}/capacitacions/{capacitacion}','CapacitacionController@show');
+        Route::get('capacitacions/{capacitacion}','CapacitacionController@show');
         Route::post('users/{user}/capacitacions','CapacitacionController@store');
-        Route::put('users/{user}/capacitacions/{capacitacion}','CapacitacionController@update');
-        Route::delete('users/{user}/capacitacions/{capacitacion}','CapacitacionController@delete');
+        Route::put('capacitacions/{capacitacion}','CapacitacionController@update');
+        Route::delete('capacitacions/{capacitacion}','CapacitacionController@delete');
 
         //Habilidad
         Route::get('users/{user}/habilidades','HabilidadController@index');

@@ -20,6 +20,7 @@ class Capacitacion extends JsonResource
             'nombreInstitucionCapacitadora'=>$this->nombreInstitucionCapacitadora,
             'fechaInicioCapacitacion'=>$this->fechaInicioCapacitacion,
             'fechaFinCapacitacion'=>$this->fechaFinCapacitacion,
+            'document'=>$this->document,
             'user_id'=>$this->User::find($this->user_id),
         ];
     }
