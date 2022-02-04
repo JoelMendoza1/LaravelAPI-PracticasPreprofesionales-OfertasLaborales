@@ -27,6 +27,7 @@ class CapacitacionesTableSeeder extends Seeder
                     'nombreInstitucionCapacitadora'=>$faker->company,
                     'fechaInicioCapacitacion'=>$faker->dateTimeThisCentury($max = 'now', $timezone = null),
                     'fechaFinCapacitacion'=>$faker->dateTimeThisCentury($max = 'now', $timezone = null),
+                    'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
                     'user_id'=>$user->id,
                 ]);
             }

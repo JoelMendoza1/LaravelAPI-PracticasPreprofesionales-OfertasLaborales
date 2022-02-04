@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
             'image' => 'public/usersimages/' . $image_name,
             'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
 
-        ]);
+        ])->assignRole('administrador');
         // Generar algunos usuarios Pasantes para nuestra aplicacion
         for ($i = 0; $i < 20; $i++) {
             $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
 
 
-            ]);
+            ])->assignRole('pasante');
         }
         for ($i = 0; $i < 20; $i++) {
             $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
@@ -108,7 +108,7 @@ class UsersTableSeeder extends Seeder
                 'descriptionRequest'=>'La validación de su cuenta se encuentra en proceso',
                 'image' => 'public/usersimages/' . $image_name,
                 'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
-            ]);
+            ])->assignRole('empresa');
         }
     }
 }

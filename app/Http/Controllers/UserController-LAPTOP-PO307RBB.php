@@ -128,7 +128,6 @@ class UserController extends Controller
             'address'=> 'required|string|max:255',
             'dateOfBirth'=> 'required|string|max:255',
             'institution'=> 'required|string|max:255',
-
         ]);
 
         $user = new User($request->all());
@@ -155,7 +154,6 @@ class UserController extends Controller
             'address'=> 'required|string|max:255',
             'dateOfBirth'=> 'required|string|max:255',
             'institution'=> 'required|string|max:255',
-
         ]);
 
         $user = new User($request->all());

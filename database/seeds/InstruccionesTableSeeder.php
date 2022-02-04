@@ -27,9 +27,11 @@ class InstruccionesTableSeeder extends Seeder
             $num_i = 2;
             for ($j = 0; $j < $num_i; $j++) {
                 Instrucion::create([
+                    'instruccion'=> $faker->sentence,
                     'nivelInstrucion' => $faker->sentence,
                     'institucion' => $faker->sentence,
                     'especializacion'=>$faker->sentence,
+                    'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
                     'user_id'=>$user->id,
                 ]);
             }

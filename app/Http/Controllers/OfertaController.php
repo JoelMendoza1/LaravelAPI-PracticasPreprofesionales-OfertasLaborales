@@ -55,7 +55,7 @@ class OfertaController extends Controller
             'direcionOferta'=>'required|string|max:255',
             'carreraOferta'=>'required|string|max:255',
             'visible'=>'required|boolean',
-        ], self::$messages);
+        ]);
         $oferta = $empresa->ofertas()->save(new Oferta($request->all()));
         return response()->json($oferta,201);
     }

@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->text('descriptionRequest')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 

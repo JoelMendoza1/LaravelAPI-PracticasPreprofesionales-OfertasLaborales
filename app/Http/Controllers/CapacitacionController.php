@@ -14,6 +14,19 @@ class CapacitacionController extends Controller
         'required'=>'El campo o atributo es obligatorio',
         //'body,required'=>'El body no es valido'
     ];
+    public function updateDocument(Request $request,Capacitacion $capacitacion){
+        if($capacitacion->document==""){
+
+            $path2 = $request->document->store('public/capacitaciondocument');
+            $capacitacion->document = $path2;
+        }else{
+            Storage::delete($capacitacion->document);
+            $path2 = $request->document->store('public/capacitaciondocument');
+            $capacitacion->document = $path2;
+        }
+        $capacitacion->save();
+        return response()->json(new CapacitacionResource($capacitacion),200);
+    }
     public function document(Capacitacion $capacitacion){
         return Storage::download( $capacitacion->document.substr(6));
     }

@@ -14,6 +14,7 @@ class Empresa extends Model
         'telefonoEmpresa',
         'emailEmpresa',
         'direccionEmpresa',
+        'imagen',
         'user_id'
     ];
     public function user(){
