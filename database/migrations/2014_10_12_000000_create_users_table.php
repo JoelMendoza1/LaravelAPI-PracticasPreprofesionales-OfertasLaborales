@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('totalSemestrerCarrer')->nullable();
             $table->boolean('request')->nullable();
             $table->text('descriptionRequest')->nullable();
+            $table->string('typeUser',1);
             $table->rememberToken();
             $table->timestamps();
 

@@ -42,16 +42,22 @@ Route::group(['middleware' => ['cors']], function () {
         Route::post('usersImagen/{user}','UserController@updateImgen');
         Route::get('usuarios','UserController@getAuthenticatedUser');
         Route::get('getRol/{user}','UserController@rolUser');
+        Route::post('usersDocument/{user}','UserController@updateDocument');
 
         //Empresa
         Route::get('users/{user}/empresas','EmpresaController@index');
         Route::get('empresas/{empresa}','EmpresaController@show');
 
         Route::group(['middleware' => ['role:administrador']], function () {
-            Route::get('users','UserController@index');
-            Route::get('aprobados','UserController@index1');
-            Route::get('rechazados','UserController@index2');
-            Route::get('pendientes','UserController@index3');
+            Route::get('usersPasantes','UserController@indexPasante');
+            Route::get('aprobadosPasantes','UserController@indexAutorizadoPasante');
+            Route::get('rechazadosPasantes','UserController@indexRechazadoPasante');
+            Route::get('pendientesPasantes','UserController@indexPendientePasante');
+
+            Route::get('usersEmpresa','UserController@indexEmpresa');
+            Route::get('aprobadosEmpresa','UserController@indexAutorizadoEmpresa');
+            Route::get('rechazadosEmpresa','UserController@indexRechazadoEmpresa');
+            Route::get('pendientesEmpresa','UserController@indexPendienteEmpresa');
         });
         Route::group(['middleware' => ['role:pasante']], function () {
             //Empresa
@@ -133,6 +139,9 @@ Route::group(['middleware' => ['cors']], function () {
 
         //Postulacion
         Route::get('ofertas/{oferta}/postulacions','PostulacionController@index1');
+        Route::get('ofertas/{oferta}/postulacionsPendiente','PostulacionController@index6');
+        Route::get('ofertas/{oferta}/postulacionsAprobado','PostulacionController@index7');
+        Route::get('ofertas/{oferta}/postulacionsRechazado','PostulacionController@index8');
         Route::get('users/{user}/postulacions','PostulacionController@index2');
         Route::get('users/{user}/postulacionsPendiente','PostulacionController@index3');
         Route::get('users/{user}/postulacionsAprobado','PostulacionController@index4');

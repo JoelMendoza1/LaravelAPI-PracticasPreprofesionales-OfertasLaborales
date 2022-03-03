@@ -34,14 +34,16 @@ class UsersTableSeeder extends Seeder
             'institution'=>'Escuela Politecnica Nacional',
             'semester'=>null,
             'totalSemestrerCarrer'=>null,
-            'request'=>true,
+            'request'=>'Usuario Verificado',
             'descriptionRequest'=>null,
             'image' => 'public/usersimages/' . $image_name,
-            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
+            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
+            'typeUser'=>'A'
 
         ])->assignRole('administrador');
-        // Generar algunos usuarios Pasantes para nuestra aplicacion
-        for ($i = 0; $i < 20; $i++) {
+
+        // Generar algunos usuarios Pasantes verificados para nuestra aplicacion
+        for ($i = 0; $i < 5; $i++) {
             $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
 
             User::create([
@@ -52,45 +54,22 @@ class UsersTableSeeder extends Seeder
             'identificationCard'=>$faker->buildingNumber,
             'telephoneNumber'=>$faker->buildingNumber,
             'address'=>$faker->address,
-            'dateOfBirth'=>$faker->date($format = 'd-m-Y', $max = 'now'),
+            'dateOfBirth'=>$faker->date($format = 'd/m/Y', $max = 'now'),
             'career'=>$faker->randomElement($array = array ('Desarrollo de Sofware','Agua y saniamiento ambiental','Electromescanica','Telecomunicaciones')),
             'institution'=>'Escuela Politecnica Nacional',
             'semester'=>$faker->randomElement($array = array ('Primero','Segundo','Tercer','Cuarto','Quinto')),
-            'totalSemestrerCarrer'=>'Cinco',
+            'totalSemestrerCarrer'=>'6',
             'request'=>true,
-            'descriptionRequest'=>null,
+            'descriptionRequest'=>'Usuario verificado',
             'image' => 'public/usersimages/' . $image_name,
-            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
-
-
+            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
+            'typeUser'=>'P'
             ])->assignRole('pasante');
         }
-        for ($i = 0; $i < 20; $i++) {
+        // Generar algunos usuarios Pasantes no verificados para nuestra aplicacion
+        for ($i = 0; $i < 5; $i++) {
             $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
 
-            User::create([
-            'name' =>$faker->firstName,
-            'lastname'=>$faker->lastName,
-            'email' =>$faker->email,
-            'password' => $password,
-            'identificationCard'=>$faker->buildingNumber,
-            'telephoneNumber'=>$faker->buildingNumber,
-            'address'=>$faker->address,
-            'dateOfBirth'=>$faker->date($format = 'd-m-Y', $max = 'now'),
-            'career'=>$faker->randomElement($array = array ('Desarrollo de Sofware','Agua y saniamiento ambiental','Electromescanica','Telecomunicaciones')),
-            'institution'=>'Escuela Politecnica Nacional',
-            'semester'=>$faker->randomElement($array = array ('Primero','Segundo','Tercer','Cuarto','Quinto')),
-            'totalSemestrerCarrer'=>'Cinco',
-            'request'=>null,
-            'descriptionRequest'=>true,
-            'image' => 'public/usersimages/' . $image_name,
-            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
-
-
-            ]);
-        }
-        for ($i = 0; $i < 20; $i++) {
-            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
             User::create([
                 'name' =>$faker->firstName,
                 'lastname'=>$faker->lastName,
@@ -99,16 +78,118 @@ class UsersTableSeeder extends Seeder
                 'identificationCard'=>$faker->buildingNumber,
                 'telephoneNumber'=>$faker->buildingNumber,
                 'address'=>$faker->address,
-                'dateOfBirth'=>$faker->date($format = 'd-m-Y', $max = 'now'),
+                'dateOfBirth'=>$faker->date($format = 'd/m/Y', $max = 'now'),
+                'career'=>$faker->randomElement($array = array ('Desarrollo de Sofware','Agua y saniamiento ambiental','Electromescanica','Telecomunicaciones')),
+                'institution'=>'Escuela Politecnica Nacional',
+                'semester'=>$faker->randomElement($array = array ('Primero','Segundo','Tercer','Cuarto','Quinto')),
+                'totalSemestrerCarrer'=>'6',
+                'request'=>false,
+                'descriptionRequest'=>'Usuario rechazado por motivos....',
+                'image' => 'public/usersimages/' . $image_name,
+                'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
+                'typeUser'=>'P'
+            ])->assignRole('pasante');
+        }
+        // Generar algunos usuarios Pasantes pendientes para nuestra aplicacion
+        for ($i = 0; $i < 5; $i++) {
+            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
+
+            User::create([
+                'name' =>$faker->firstName,
+                'lastname'=>$faker->lastName,
+                'email' =>$faker->email,
+                'password' => $password,
+                'identificationCard'=>$faker->buildingNumber,
+                'telephoneNumber'=>$faker->buildingNumber,
+                'address'=>$faker->address,
+                'dateOfBirth'=>$faker->date($format = 'd/m/Y', $max = 'now'),
+                'career'=>$faker->randomElement($array = array ('Desarrollo de Sofware','Agua y saniamiento ambiental','Electromescanica','Telecomunicaciones')),
+                'institution'=>'Escuela Politecnica Nacional',
+                'semester'=>$faker->randomElement($array = array ('Primero','Segundo','Tercer','Cuarto','Quinto')),
+                'totalSemestrerCarrer'=>'6',
+                'request'=>null,
+                'descriptionRequest'=>'Estamos verificando tú usuario',
+                'image' => 'public/usersimages/' . $image_name,
+                'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
+                'typeUser'=>'P'
+            ])->assignRole('pasante');
+        }
+
+        // Generar algunos usuarios Empresa verificados para nuestra aplicacion
+        for ($i = 0; $i < 5; $i++) {
+            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
+
+            User::create([
+            'name' =>$faker->firstName,
+            'lastname'=>$faker->lastName,
+            'email' =>$faker->email,
+            'password' => $password,
+            'identificationCard'=>$faker->buildingNumber,
+            'telephoneNumber'=>$faker->buildingNumber,
+            'address'=>$faker->address,
+            'dateOfBirth'=>$faker->date($format = 'd/m/Y', $max = 'now'),
+            'career'=>null,
+            'institution'=>'Escuela Politecnica Nacional',
+            'semester'=>null,
+            'totalSemestrerCarrer'=>null,
+            'request'=>true,
+                'descriptionRequest'=>'Usuario Verificado',
+            'image' => 'public/usersimages/' . $image_name,
+            'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
+            'typeUser'=>'E'
+
+            ])->assignRole('empresa');
+        }
+        // Generar algunos usuarios Empresa pendientes para nuestra aplicacion
+        for ($i = 0; $i < 5; $i++) {
+            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
+
+            User::create([
+                'name' =>$faker->firstName,
+                'lastname'=>$faker->lastName,
+                'email' =>$faker->email,
+                'password' => $password,
+                'identificationCard'=>$faker->buildingNumber,
+                'telephoneNumber'=>$faker->buildingNumber,
+                'address'=>$faker->address,
+                'dateOfBirth'=>$faker->date($format = 'd/m/Y', $max = 'now'),
                 'career'=>null,
-                'institution'=>$faker->company,
+                'institution'=>'Escuela Politecnica Nacional',
+                'semester'=>null,
+                'totalSemestrerCarrer'=>null,
+                'request'=>null,
+                'descriptionRequest'=>'Estamos verificando a tú usuario',
+                'image' => 'public/usersimages/' . $image_name,
+                'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
+                'typeUser'=>'E'
+
+            ])->assignRole('empresa');
+        }
+        // Generar algunos usuarios Empresa no verificados para nuestra aplicacion
+        for ($i = 0; $i < 5; $i++) {
+            $image_name = $faker->image('public/storage/usersimages', 400, 300, null,false);
+
+            User::create([
+                'name' =>$faker->firstName,
+                'lastname'=>$faker->lastName,
+                'email' =>$faker->email,
+                'password' => $password,
+                'identificationCard'=>$faker->buildingNumber,
+                'telephoneNumber'=>$faker->buildingNumber,
+                'address'=>$faker->address,
+                'dateOfBirth'=>$faker->date($format = 'd/m/Y', $max = 'now'),
+                'career'=>null,
+                'institution'=>'Escuela Politecnica Nacional',
                 'semester'=>null,
                 'totalSemestrerCarrer'=>null,
                 'request'=>false,
-                'descriptionRequest'=>'La validación de su cuenta se encuentra en proceso',
+                'descriptionRequest'=>'Usuario Rechazado por motivos ...',
                 'image' => 'public/usersimages/' . $image_name,
-                'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf'
+                'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
+                'typeUser'=>'E'
+
             ])->assignRole('empresa');
         }
+
     }
 }

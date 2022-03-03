@@ -31,21 +31,42 @@ class UserController extends Controller
         //return response()->download(public_path(Storage::url($user->image)), $user->image);
      }
 
-    public function index(){
-        return new UserCollection(User::orderBy('id', 'DESC')->paginate(10));
+    public function indexPasante(){
+
+        $user= User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','P' )->get();
+        return response()->json( UserResource::collection($user),200);
     }
-    public function index1(){
-        $user= User::orderBy('id', 'DESC')->where('request', 'LIKE',1 )->paginate(10);
-        return new UserCollection($user);
+    public function indexAutorizadoPasante(){
+        $user= User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','P' )->where('request', 'LIKE',1 )->get();
+        return response()->json( UserResource::collection($user),200);
     }
-    public function index2(){
-        $user= User::orderBy('id', 'DESC')->where('request', 'LIKE', 0)->paginate(10);
-        return new UserCollection($user);
+    public function indexRechazadoPasante(){
+        $user= User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','P' )->where('request', 'LIKE', 0)->get();
+        return response()->json( UserResource::collection($user),200);
     }
-    public function index3(){
-        $user= User::orderBy('id', 'DESC')->whereNull('request')->paginate(10);
-        return new UserCollection($user);
+    public function indexPendientePasante(){
+        $user= User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','P' )->whereNull('request')->get();
+        return response()->json( UserResource::collection($user),200);
     }
+
+    public function indexEmpresa(){
+        $user=User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','E' )->get();
+        //$user=User::all()->where('typeUser', 'LIKE','E' );
+        return response()->json( UserResource::collection($user),200);
+    }
+    public function indexAutorizadoEmpresa(){
+        $user= User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','E' )->where('request', 'LIKE',1 )->get();
+        return response()->json( UserResource::collection($user),200);
+    }
+    public function indexRechazadoEmpresa(){
+        $user= User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','E' )->where('request', 'LIKE', 0)->get();
+        return response()->json( UserResource::collection($user),200);
+    }
+    public function indexPendienteEmpresa(){
+        $user= User::orderBy('id', 'DESC')->where('typeUser', 'LIKE','E' )->whereNull('request')->get();
+        return response()->json( UserResource::collection($user),200);
+    }
+
     public function show(User $user){
         return response()->json(new UserResource($user),200);
     }
@@ -63,6 +84,18 @@ class UserController extends Controller
 
         //$path2->copy('storage/app/public'.trim($path2, "public"), "public/storage/usersimages");
         //Storage::putFile('usersimages','storage/app/public'.trim($path2, "public") );
+        $user->save();
+        return response()->json(new UserResource($user),200);
+    }
+    public function updateDocument(Request $request,User $user){
+        if($user->document==""){
+            $path2 = $request->document -> store('public/usersdocuments');
+            $user->document = $path2;
+        }else{
+            Storage::delete($user->document);
+            $path2 = $request->document -> store('public/usersdocuments');
+            $user->document = $path2;
+        }
         $user->save();
         return response()->json(new UserResource($user),200);
     }

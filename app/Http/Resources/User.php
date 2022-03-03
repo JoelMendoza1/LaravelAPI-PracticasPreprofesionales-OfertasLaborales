@@ -31,6 +31,7 @@ class User extends JsonResource
             'descriptionRequest'=>$this->descriptionRequest,
             'document'=>$this->document,
             'image'=>$this->image,
+            'typeUser'=>$this->typeUser,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -34,6 +34,15 @@ class PostulacionController extends Controller
     public function index5(User $user){
         return response()->json(PostulacionResorce::collection($user->postulacion->sortByDesc('updated_at')->where('estadoPostulacion', 'LIKE',false)),200);
     }
+    public function index6(Oferta $oferta){
+        return response()->json(PostulacionResorce::collection( $oferta->postulacion->sortByDesc('updated_at')->whereNull('estadoPostulacion')),200);
+    }
+    public function index7(Oferta $oferta){
+        return response()->json(PostulacionResorce::collection( $oferta->postulacion->sortByDesc('updated_at')->where('estadoPostulacion', 'LIKE', 1)),200);
+    }
+    public function index8(Oferta $oferta){
+        return response()->json(PostulacionResorce::collection( $oferta->postulacion->sortByDesc('updated_at')->where('estadoPostulacion', 'LIKE',0)),200);
+    }
     public function show(Postulacion $postulacion){
         return response()->json(new PostulacionResorce($postulacion),200);
     }

@@ -22,22 +22,22 @@ class OfertaController extends Controller
         //'body,required'=>'El body no es valido'
     ];
     public function index(){
-        $oferta=Oferta::orderBy('id', 'DESC')->where('visible', 'LIKE', 1)->paginate(10);
-        return new OfertaCollection($oferta);
+        $oferta=Oferta::orderBy('id', 'DESC')->where('visible', 'LIKE', 1)->get();
+        return response()->json( OfertaResource::collection($oferta),200);
     }
     public function index1(Empresa $empresa){
         $oferta= $empresa->ofertas;
-        return response()->json(new OfertaCollection( $oferta),200);
+        return response()->json( OfertaResource::collection($oferta),200);
         //return response()->json(CommentResource::collection($article->comments->sortByDesc('created_at')), 200);
     }
     public function index2(Empresa $empresa){
-        $oferta= $empresa->ofertas->where('visible','LIKE',true);
-        return response()->json(OfertaResource::collection($oferta),200);
+        $oferta= $empresa->ofertas->where('visible','LIKE',1);
+        return response()->json( OfertaResource::collection($oferta),200);
         //return response()->json(CommentResource::collection($article->comments->sortByDesc('created_at')), 200);
     }
     public function index3(Empresa $empresa){
-        $oferta=  $empresa->ofertas->where('visible','LIKE',false);
-        return response()->json(OfertaResource::collection($oferta),200);
+        $oferta=  $empresa->ofertas->where('visible','LIKE',0);
+        return response()->json( OfertaResource::collection($oferta),200);
         //return response()->json(CommentResource::collection($article->comments->sortByDesc('created_at')), 200);
     }
     public function show(Oferta $oferta){
