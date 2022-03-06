@@ -60,13 +60,6 @@ Route::group(['middleware' => ['cors']], function () {
             Route::get('pendientesEmpresa','UserController@indexPendienteEmpresa');
         });
         Route::group(['middleware' => ['role:pasante']], function () {
-            //Empresa
-            Route::post('users/{user}/empresas','EmpresaController@store');
-            Route::put('empresas/{empresa}','EmpresaController@update');
-            Route::delete('empresas/{empresa}','EmpresaController@delete');
-            Route::post('empresaImagen/{empresa}','EmpresaController@updateImgen');
-        });
-        Route::group(['middleware' => ['role:empresa']], function () {
             //Capacitacion
             Route::post('users/{user}/capacitacions','CapacitacionController@store');
             Route::put('capacitacions/{capacitacion}','CapacitacionController@update');
@@ -93,6 +86,14 @@ Route::group(['middleware' => ['cors']], function () {
             Route::post('users/{user}/trayectoriaslaborales','TrayectorialaboralController@store');
             Route::put('trayectoriaslaborales/{trayectorialaboral}','TrayectorialaboralController@update');
             Route::delete('trayectoriaslaborales/{trayectorialaboral}','TrayectorialaboralController@delete');
+
+        });
+        Route::group(['middleware' => ['role:empresa']], function () {
+            //Empresa
+            Route::post('users/{user}/empresas','EmpresaController@store');
+            Route::put('empresas/{empresa}','EmpresaController@update');
+            Route::delete('empresas/{empresa}','EmpresaController@delete');
+            Route::post('empresaImagen/{empresa}','EmpresaController@updateImgen');
 
         });
 
