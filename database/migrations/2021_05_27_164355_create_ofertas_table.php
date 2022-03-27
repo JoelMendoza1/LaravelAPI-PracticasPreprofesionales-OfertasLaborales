@@ -18,8 +18,7 @@ class CreateOfertasTable extends Migration
             $table->string('oferta');
             $table->string('fechaOferta');
             $table->text('descripcionOferta');
-            $table->string('horarioInicio');
-            $table->string('horarioFin');
+            $table->string('horario');
             $table->integer('numberoPostulantes');
             $table->string('direcionOferta');
             $table->string('carreraOferta');

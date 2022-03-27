@@ -28,14 +28,13 @@ class OfertasTableSeeder extends Seeder
 
            // Creamos un comentario para cada artículo con este usuario
            foreach ($empresas as $empresa) {
-            for ($i = 0; $i < 9; $i++) {
+            for ($i = 0; $i < 2; $i++) {
 
                Oferta::create([
                    'oferta' => $faker->text,
                    'fechaOferta'=>$faker->date($format = 'd/m/Y', $max = 'now'),
                    'descripcionOferta'=>$faker->paragraph,
-                   'horarioInicio'=>$faker->time($format = 'H:i', $max = 'now'),
-                   'horarioFin'=>$faker->time($format = 'H:i', $max = 'now'),
+                   'horario'=>$faker->time($format = 'H:i', $max = 'now'),
                    'numberoPostulantes'=>$faker->randomDigitNotNull,
                    'direcionOferta'=>$faker->address,
                    'carreraOferta'=>$faker->jobTitle,

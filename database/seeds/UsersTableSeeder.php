@@ -34,8 +34,8 @@ class UsersTableSeeder extends Seeder
             'institution'=>'Escuela Politecnica Nacional',
             'semester'=>null,
             'totalSemestrerCarrer'=>null,
-            'request'=>'Usuario Verificado',
-            'descriptionRequest'=>null,
+            'request'=>true,
+            'descriptionRequest'=>'Usuario Verificado',
             'image' => 'public/usersimages/' . $image_name,
             'document'=> 'public/usersdocuments/esPI9k0sdD1cpYsQlrg4hxTVnNpucLWqjZ1nIP4Y.pdf',
             'typeUser'=>'A'
